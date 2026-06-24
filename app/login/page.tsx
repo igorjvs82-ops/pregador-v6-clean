@@ -13,20 +13,27 @@ export default function LoginPage() {
     setLoading(true);
     setMessage('');
 
-    const supabase = createClient();
-    const origin = window.location.origin;
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: `${origin}/auth/callback?next=/dashboard` },
-    });
+    try {
+      const supabase = createClient();
+      const origin = window.location.origin;
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: `${origin}/auth/callback?next=/dashboard` },
+      });
 
-    setLoading(false);
-    setMessage(error ? error.message : 'Enviamos um link de acesso para seu e-mail.');
+      setMessage(error ? `Erro: ${error.message}` : 'Enviamos um link de acesso para seu e-mail. Verifique também spam e promoções.');
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : 'Erro desconhecido.';
+      setMessage(`Erro ao enviar link: ${detail}`);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <main className="container">
       <section className="card" style={{ maxWidth: 520, margin: '0 auto' }}>
+        <p style={{ fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', color: '#475569' }}>Pregador.app</p>
         <h1>Entrar</h1>
         <p style={{ color: '#475569' }}>Acesse com magic link para preparar suas mensagens.</p>
         <form onSubmit={handleSubmit}>
