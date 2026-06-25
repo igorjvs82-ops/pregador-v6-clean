@@ -16,18 +16,18 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           <a href="#confianca">Confianca</a>
           <a href="#como-funciona">Como funciona</a>
           <a href="#radar">Radar</a>
-          <a href="#beta">Beta</a>
-          <Link href="/login">Entrar</Link>
+          <a href="#beta">Acesso antecipado</a>
+          <Link href="/login">Entrar no app</Link>
         </nav>
-        <a className="btn" href="#beta">Entrar no beta</a>
+        <a className="btn" href="#beta">Solicitar acesso</a>
       </header>
 
       <section className="marketing-hero">
         <div className="hero-copy">
-          <span className="eyebrow">Beta pastoral fechado</span>
+          <span className="eyebrow">Acesso antecipado para pregadores</span>
           <h1 className="marketing-title">Prepare mensagens biblicas com clareza, revisao teologica e fidelidade ao texto.</h1>
           <p className="lead">Verbum e uma plataforma de preparacao biblica assistida que ajuda pregadores a organizar exegese, proposicao, estrutura homiletica, aplicacoes e alertas teologicos. Sempre como base revisavel, nunca como substituto do pregador.</p>
-          <div className="actions"><a className="btn btn-gold" href="#beta">Entrar no beta pastoral</a><a className="btn btn-secondary" href="#exemplo">Ver exemplo</a></div>
+          <div className="actions"><a className="btn btn-gold" href="#beta">Solicitar acesso antecipado</a><a className="btn btn-secondary" href="#exemplo">Ver exemplo</a></div>
           <p className="trust-line">A ferramenta auxilia. O pregador estuda, ora, discerne, revisa e aprova.</p>
         </div>
         <div className="product-mockup">
@@ -115,12 +115,17 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       </section>
 
       <section id="beta" className="marketing-section final-cta">
-        <span className="eyebrow">Candidatura ao beta</span>
-        <h2>Ajude a construir uma ferramenta seria para pregadores fieis ao texto.</h2>
-        <p>Estamos formando o primeiro grupo de usuarios do Verbum. As vagas sao limitadas para manter acompanhamento proximo e coletar feedback pastoral real.</p>
-        {betaStatus === 'ok' ? <p className="badge" style={{ margin: '0 auto 18px' }}>Candidatura recebida. Entraremos em contato.</p> : null}
-        {betaStatus === 'invalid' ? <p className="badge" style={{ margin: '0 auto 18px' }}>Preencha nome, e-mail e WhatsApp.</p> : null}
-        {betaStatus === 'error' ? <p className="badge" style={{ margin: '0 auto 18px' }}>Nao foi possivel salvar agora. Tente novamente.</p> : null}
+        <span className="eyebrow">Acesso antecipado</span>
+        <h2>Teste o Verbum antes do lancamento publico.</h2>
+        <p>Estamos liberando acesso inicial para um grupo limitado de pastores, pregadores e lideres que desejam usar o Verbum na preparacao real de mensagens. Os selecionados terao um periodo de teste inicial e poderao garantir uma condicao especial de fundador quando os planos pagos forem abertos.</p>
+        <div className="feature-grid" style={{ marginTop: 24, textAlign: 'left' }}>
+          <div className="feature-card"><b>01</b><h3>Acesso antecipado</h3><p>Use a plataforma antes da abertura publica e teste o fluxo de preparacao biblica assistida.</p></div>
+          <div className="feature-card"><b>02</b><h3>Condicao de fundador</h3><p>Participantes selecionados terao prioridade e oferta especial quando a assinatura for liberada.</p></div>
+          <div className="feature-card"><b>03</b><h3>Vagas limitadas</h3><p>A liberacao sera gradual para manter qualidade, estabilidade e acompanhamento do uso real.</p></div>
+        </div>
+        {betaStatus === 'ok' ? <p className="badge" style={{ margin: '24px auto 18px' }}>Solicitacao recebida. Entraremos em contato.</p> : null}
+        {betaStatus === 'invalid' ? <p className="badge" style={{ margin: '24px auto 18px' }}>Preencha nome, e-mail e WhatsApp.</p> : null}
+        {betaStatus === 'error' ? <p className="badge" style={{ margin: '24px auto 18px' }}>Nao foi possivel salvar agora. Tente novamente.</p> : null}
         <form className="card" action="/api/beta-leads" method="post" style={{ maxWidth: 860, margin: '24px auto 0', textAlign: 'left' }}>
           <div className="form-grid">
             <div className="field"><label>Nome</label><input name="name" required /></div>
@@ -129,10 +134,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             <div className="field"><label>Voce e</label><select name="role" required><option>Pastor</option><option>Pregador</option><option>Lider de celula</option><option>Professor de EBD</option><option>Seminarista</option><option>Outro</option></select></div>
             <div className="field"><label>Frequencia de pregacao ou ensino</label><select name="frequency" required><option>Toda semana</option><option>A cada 15 dias</option><option>Uma vez por mes</option><option>Ocasionalmente</option><option>Ainda estou em formacao</option></select></div>
             <div className="field"><label>Maior dificuldade</label><select name="main_challenge" required><option>Exegese</option><option>Estrutura da mensagem</option><option>Aplicacao pastoral</option><option>Falta de tempo</option><option>Revisao teologica</option><option>Slides ou material de apoio</option><option>Clareza na comunicacao</option></select></div>
-            <div className="field full"><label>O que voce espera de uma ferramenta como o Verbum?</label><textarea name="expectation" rows={4} /></div>
+            <div className="field full"><label>O que faria o Verbum valer uma assinatura para voce ou sua igreja?</label><textarea name="expectation" rows={4} /></div>
           </div>
-          <button className="btn btn-gold" type="submit">Enviar candidatura ao beta</button>
-          <p className="muted" style={{ marginTop: 16 }}>Ao enviar, voce concorda em ser contatado sobre o beta. Leia tambem: <Link href="/uso-responsavel">uso responsavel</Link> e <Link href="/privacidade">privacidade</Link>.</p>
+          <button className="btn btn-gold" type="submit">Solicitar acesso antecipado</button>
+          <p className="muted" style={{ marginTop: 16 }}>Ao enviar, voce concorda em ser contatado sobre o acesso antecipado, teste inicial e planos futuros. Leia tambem: <Link href="/uso-responsavel">uso responsavel</Link> e <Link href="/privacidade">privacidade</Link>.</p>
         </form>
       </section>
     </main>
