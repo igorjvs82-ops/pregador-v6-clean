@@ -54,7 +54,7 @@ export default async function DashboardPage() {
         <div className="grid-3">
           <div className="stat"><strong>{total}</strong><span className="muted">preparações recentes</span></div>
           <div className="stat"><strong>Radar</strong><span className="muted">revisão teológica</span></div>
-          <div className="stat"><strong>Essencial</strong><span className="muted">plano atual</span></div>
+          <div className="stat"><strong>Acesso inicial</strong><span className="muted">plano atual</span></div>
         </div>
 
         <div className="grid-2">
@@ -66,8 +66,8 @@ export default async function DashboardPage() {
           </div>
           <div className="card">
             <span className="badge">Assinatura</span>
-            <h2 style={{ marginTop: 14 }}>Veja os planos previstos.</h2>
-            <p className="muted">Durante o acesso antecipado, os planos servem como referência. Checkout e cobrança serão ativados em etapa posterior.</p>
+            <h2 style={{ marginTop: 14 }}>Essencial começa em R$ 39/mês.</h2>
+            <p className="muted">O acesso inicial é gratuito e limitado. Os planos pagos serão: Essencial, Pregador e Igreja.</p>
             <Link className="btn btn-secondary" href="/assinatura">Ver assinatura</Link>
           </div>
         </div>
