@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
+function redirectTo(request: Request, status: 'ok' | 'invalid' | 'error') {
+  return NextResponse.redirect(new URL(`/?beta=${status}#beta`, request.url), 303);
+}
+
 export async function POST(request: Request) {
   const formData = await request.formData();
 
@@ -16,7 +20,7 @@ export async function POST(request: Request) {
   };
 
   if (!payload.name || !payload.email || !payload.whatsapp) {
-    return NextResponse.redirect(new URL('/?beta=invalid#beta', request.url));
+    return redirectTo(request, 'invalid');
   }
 
   const supabase = await createClient();
@@ -24,8 +28,8 @@ export async function POST(request: Request) {
 
   if (error) {
     console.error('beta_leads_insert_error', error.message);
-    return NextResponse.redirect(new URL('/?beta=error#beta', request.url));
+    return redirectTo(request, 'error');
   }
 
-  return NextResponse.redirect(new URL('/?beta=ok#beta', request.url));
+  return redirectTo(request, 'ok');
 }
