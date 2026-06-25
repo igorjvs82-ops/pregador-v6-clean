@@ -21,7 +21,7 @@ async function createSermon(formData: FormData) {
     sensitive_points: String(formData.get('sensitive_points') ?? ''),
   };
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://pregador-v6-clean-igor-santos-projects-cb9f18a1.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://pregador-v6-clean-git-main-igor-santos-projects-cb9f18a1.vercel.app';
   const response = await fetch(`${baseUrl}/api/gerar-mensagem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
 
   if (!response.ok) throw new Error('Falha ao gerar preparação.');
@@ -37,8 +37,6 @@ async function createSermon(formData: FormData) {
     duration_minutes: payload.duration_minutes,
     occasion: payload.occasion,
     tone: payload.tone,
-    spiritual_goal: payload.spiritual_goal,
-    sensitive_points: payload.sensitive_points,
     input: payload,
     outline: generated.outline,
     theological_review: generated.theological_review,
