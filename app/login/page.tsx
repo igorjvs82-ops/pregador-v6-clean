@@ -21,7 +21,7 @@ export default function LoginPage() {
         options: { emailRedirectTo: `${origin}/auth/callback?next=/dashboard` },
       });
 
-      setMessage(error ? `Erro: ${error.message}` : 'Enviamos um link de acesso para seu e-mail. Verifique também spam e promoções.');
+      setMessage(error ? `Erro: ${error.message}` : 'Enviamos um link de acesso para seu e-mail. Verifique tambem spam e promocoes.');
     } catch (error) {
       const detail = error instanceof Error ? error.message : 'Erro desconhecido.';
       setMessage(`Erro ao enviar link: ${detail}`);
@@ -33,9 +33,9 @@ export default function LoginPage() {
   return (
     <main className="container">
       <section className="card" style={{ maxWidth: 520, margin: '0 auto' }}>
-        <p style={{ fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', color: '#475569' }}>Pregador.app</p>
+        <p style={{ fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', color: '#475569' }}>Verbum</p>
         <h1>Entrar</h1>
-        <p style={{ color: '#475569' }}>Acesse com magic link para preparar suas mensagens.</p>
+        <p style={{ color: '#475569' }}>Acesse com magic link para preparar, revisar e salvar suas mensagens biblicas.</p>
         <form onSubmit={handleSubmit}>
           <div className="field">
             <label htmlFor="email">E-mail</label>
