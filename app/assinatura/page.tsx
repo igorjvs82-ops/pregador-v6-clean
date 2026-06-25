@@ -4,18 +4,26 @@ import { createClient } from '@/lib/supabase/server';
 
 const plans = [
   {
-    name: 'Essencial',
+    name: 'Acesso inicial',
     price: 'R$ 0',
-    description: 'Para conhecer o fluxo de preparação bíblica assistida.',
-    features: ['Preparação básica limitada', 'Histórico inicial', 'Uso responsável obrigatório', 'Base revisável para estudo'],
+    description: 'Para testar o Verbum durante a fase inicial, com limite de uso.',
+    features: ['Teste inicial do fluxo', 'Preparações limitadas', 'Histórico básico', 'Base revisável para estudo'],
     cta: 'Plano atual',
     href: '/dashboard',
   },
   {
+    name: 'Essencial',
+    price: 'R$ 39/mês',
+    description: 'Para pregadores que precisam de preparação básica e organização.',
+    features: ['Preparações básicas', 'Radar limitado', 'Histórico de mensagens', 'Exportação simples'],
+    cta: 'Entrar na lista',
+    href: '/#acesso',
+  },
+  {
     name: 'Pregador',
-    price: 'R$ 49/mês',
+    price: 'R$ 79/mês',
     description: 'Para quem prega, ensina ou lidera com frequência.',
-    features: ['Preparações ampliadas', 'Radar Teológico', 'Teleprompter pastoral', 'Slides e exportação textual', 'Biblioteca de mensagens'],
+    features: ['Preparações ampliadas', 'Radar Teológico completo', 'Teleprompter pastoral', 'Slides e exportação textual', 'Biblioteca de mensagens'],
     cta: 'Entrar na lista',
     href: '/#acesso',
     featured: true,
@@ -47,14 +55,14 @@ export default async function SubscriptionPage() {
             <Link href="/uso-responsavel">Uso responsável</Link>
           </nav>
         </div>
-        <p className="sidebar-note">Acesso antecipado. Planos pagos serão ativados após validação do produto.</p>
+        <p className="sidebar-note">Acesso inicial durante validação. Planos pagos serão ativados após o checkout.</p>
       </aside>
 
       <section className="grid">
         <div className="card" style={{ padding: 34, background: 'linear-gradient(135deg, #fff, #fbf8ff)', boxShadow: 'var(--shadow-premium)' }}>
           <span className="eyebrow">Assinatura</span>
           <h1 className="h2" style={{ marginTop: 16 }}>Planos do Verbum</h1>
-          <p className="lead" style={{ fontSize: 17 }}>Durante o acesso antecipado, os planos servem como referência comercial. A cobrança será ativada somente quando o checkout estiver liberado.</p>
+          <p className="lead" style={{ fontSize: 17 }}>Durante o acesso inicial, os planos pagos servem como referência comercial. A cobrança será ativada somente quando o checkout estiver liberado.</p>
         </div>
 
         <div className="feature-grid">
