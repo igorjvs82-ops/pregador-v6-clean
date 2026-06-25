@@ -132,6 +132,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             <div className="field full"><label>O que voce espera de uma ferramenta como o Verbum?</label><textarea name="expectation" rows={4} /></div>
           </div>
           <button className="btn btn-gold" type="submit">Enviar candidatura ao beta</button>
+          <p className="muted" style={{ marginTop: 16 }}>Ao enviar, voce concorda em ser contatado sobre o beta. Leia tambem: <Link href="/uso-responsavel">uso responsavel</Link> e <Link href="/privacidade">privacidade</Link>.</p>
         </form>
       </section>
     </main>
