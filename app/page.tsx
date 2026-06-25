@@ -17,7 +17,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           <a href="#como-funciona">Como funciona</a>
           <a href="#radar">Radar</a>
           <a href="#planos">Planos</a>
-          <a href="#acesso">Acesso antecipado</a>
+          <a href="#faq">FAQ</a>
           <Link href="/login">Entrar no app</Link>
         </nav>
         <a className="btn" href="#acesso">Solicitar acesso</a>
@@ -106,12 +106,38 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </div>
       </section>
 
+      <section className="marketing-section">
+        <div className="section-heading"><span className="kicker">Comparativo</span><h2>Por que não usar apenas uma IA genérica?</h2></div>
+        <div className="grid-2">
+          <div className="card">
+            <span className="badge">IA genérica</span>
+            <h3 style={{ fontSize: 28 }}>Texto rápido, pouco controle pastoral.</h3>
+            <p className="muted">Pode gerar ideias úteis, mas normalmente não trabalha com fluxo homilético, limites pastorais, histórico de mensagens, perfil da igreja e revisão de riscos teológicos.</p>
+          </div>
+          <div className="card" style={{ borderColor: 'var(--primary-light)', boxShadow: 'var(--shadow-premium)' }}>
+            <span className="badge">Verbum</span>
+            <h3 style={{ fontSize: 28 }}>Preparação guiada, revisável e orientada ao púlpito.</h3>
+            <p className="muted">O foco não é entregar um sermão pronto, mas organizar o processo: texto, contexto, proposição, estrutura, aplicação, Radar Teológico e aprovação final do pregador.</p>
+          </div>
+        </div>
+      </section>
+
       <section id="planos" className="marketing-section">
         <div className="section-heading"><span className="kicker">Planos</span><h2>Comece com acesso antecipado. Evolua para o plano certo.</h2><p className="lead">Os valores abaixo são a oferta prevista para o lançamento. Participantes selecionados no acesso antecipado poderão receber condição especial de fundador.</p></div>
         <div className="feature-grid">
           <div className="feature-card"><b>Essencial</b><h3>R$ 0</h3><p>Para conhecer o fluxo. Inclui uso limitado, histórico básico e acesso inicial à preparação bíblica assistida.</p></div>
           <div className="feature-card" style={{ borderColor: 'var(--primary-light)', boxShadow: 'var(--shadow-premium)' }}><b>Pregador</b><h3>R$ 49/mês</h3><p>Para uso individual: preparações, Radar Teológico, revisão, histórico e exportação. Plano recomendado para quem prega com frequência.</p></div>
           <div className="feature-card"><b>Igreja</b><h3>R$ 149/mês</h3><p>Para equipes: múltiplos pregadores, séries, biblioteca da igreja e padronização de materiais de ensino.</p></div>
+        </div>
+      </section>
+
+      <section id="faq" className="marketing-section">
+        <div className="section-heading"><span className="kicker">FAQ</span><h2>Dúvidas antes de solicitar acesso.</h2></div>
+        <div className="grid-2">
+          <div className="card"><h3>O Verbum cria sermões prontos?</h3><p className="muted">Não. Ele gera uma base revisável para preparação. O pregador continua responsável por estudar, revisar, editar e aprovar.</p></div>
+          <div className="card"><h3>O acesso antecipado será gratuito para sempre?</h3><p className="muted">Não. O acesso inicial serve para teste e validação. Os selecionados poderão receber condição especial quando os planos pagos forem abertos.</p></div>
+          <div className="card"><h3>Posso usar para EBD, célula ou estudo bíblico?</h3><p className="muted">Sim. O foco inicial é pregação, mas o fluxo também atende ensino bíblico, pequenos grupos e estudos pastorais.</p></div>
+          <div className="card"><h3>O Radar Teológico garante que não haverá erro?</h3><p className="muted">Não. Ele aponta riscos e pontos de atenção, mas não substitui Bíblia, confissão, supervisão pastoral ou discernimento do pregador.</p></div>
         </div>
       </section>
 
