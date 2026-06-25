@@ -25,11 +25,11 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
       <section className="marketing-hero">
         <div className="hero-copy">
-          <span className="eyebrow">Acesso antecipado para pregadores</span>
+          <span className="eyebrow">Preparação bíblica assistida</span>
           <h1 className="marketing-title">Do texto à mensagem, com clareza.</h1>
-          <p className="lead">Verbum é uma plataforma de preparação bíblica assistida que ajuda pregadores a organizar exegese, proposição, estrutura homilética, aplicações e alertas teológicos. Sempre como base revisável, nunca como substituto do pregador.</p>
-          <div className="actions"><a className="btn btn-gold" href="#acesso">Solicitar acesso antecipado</a><a className="btn btn-secondary" href="#exemplo">Ver exemplo</a></div>
-          <p className="trust-line">A ferramenta auxilia. O pregador estuda, ora, discerne, revisa e aprova.</p>
+          <p className="lead">Organize exegese, estrutura homilética, aplicações e revisão teológica em um fluxo sério de preparação — sempre como base revisável, nunca como substituto do pregador.</p>
+          <div className="actions"><a className="btn btn-gold" href="#acesso">Solicitar acesso antecipado</a><a className="btn btn-secondary" href="#planos">Ver planos</a></div>
+          <p className="trust-line">Para pastores, pregadores e líderes que querem ganhar clareza sem terceirizar o púlpito.</p>
         </div>
         <div className="product-mockup">
           <div className="mockup-top"><span></span><span></span><span></span><strong>Verbum Prepare</strong></div>
@@ -106,32 +106,23 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </div>
       </section>
 
-      <section className="marketing-section">
-        <div className="section-heading"><span className="kicker">Limites claros</span><h2>O Verbum tem limites. E isso é parte da segurança.</h2></div>
-        <div className="feature-grid">
-          <div className="feature-card"><b>Não faz</b><h3>Substituir oração e estudo</h3><p>A ferramenta organiza a preparação, mas não remove o trabalho pastoral.</p></div>
-          <div className="feature-card"><b>Não faz</b><h3>Garantir infalibilidade</h3><p>O Radar aponta riscos, mas a revisão bíblica e pastoral continua indispensável.</p></div>
-          <div className="feature-card"><b>Não faz</b><h3>Decidir pelo pregador</h3><p>Nada é publicado, pregado ou exportado como final sem aprovação humana.</p></div>
-        </div>
-      </section>
-
       <section id="planos" className="marketing-section">
-        <div className="section-heading"><span className="kicker">Oferta futura</span><h2>Planos pensados para pregadores e igrejas.</h2><p className="lead">Durante o acesso antecipado, os selecionados testam a plataforma antes da abertura pública. Na liberação comercial, os planos pagos serão apresentados com condição especial de fundador.</p></div>
+        <div className="section-heading"><span className="kicker">Planos</span><h2>Comece com acesso antecipado. Evolua para o plano certo.</h2><p className="lead">Os valores abaixo são a oferta prevista para o lançamento. Participantes selecionados no acesso antecipado poderão receber condição especial de fundador.</p></div>
         <div className="feature-grid">
-          <div className="feature-card"><b>Essencial</b><h3>Para conhecer</h3><p>Acesso inicial limitado para entender o fluxo de preparação bíblica assistida.</p></div>
-          <div className="feature-card"><b>Pregador</b><h3>Para uso individual</h3><p>Preparações, histórico, Radar Teológico, revisão e exportação para quem prega com frequência.</p></div>
-          <div className="feature-card"><b>Igreja</b><h3>Para equipes</h3><p>Gestão de pregadores, séries, biblioteca da igreja e padronização de materiais de ensino.</p></div>
+          <div className="feature-card"><b>Essencial</b><h3>R$ 0</h3><p>Para conhecer o fluxo. Inclui uso limitado, histórico básico e acesso inicial à preparação bíblica assistida.</p></div>
+          <div className="feature-card" style={{ borderColor: 'var(--primary-light)', boxShadow: 'var(--shadow-premium)' }}><b>Pregador</b><h3>R$ 49/mês</h3><p>Para uso individual: preparações, Radar Teológico, revisão, histórico e exportação. Plano recomendado para quem prega com frequência.</p></div>
+          <div className="feature-card"><b>Igreja</b><h3>R$ 149/mês</h3><p>Para equipes: múltiplos pregadores, séries, biblioteca da igreja e padronização de materiais de ensino.</p></div>
         </div>
       </section>
 
       <section id="acesso" className="marketing-section final-cta">
         <span className="eyebrow">Acesso antecipado</span>
-        <h2>Teste o Verbum antes do lançamento público.</h2>
-        <p>Estamos liberando acesso inicial para um grupo limitado de pastores, pregadores e líderes que desejam usar o Verbum na preparação real de mensagens. Os selecionados terão um período de teste inicial e poderão garantir uma condição especial de fundador quando os planos pagos forem abertos.</p>
+        <h2>Entre na lista de acesso fundador.</h2>
+        <p>Estamos liberando o Verbum gradualmente para pregadores e líderes que desejam testar a plataforma na preparação real de mensagens. A inscrição não garante gratuidade permanente; ela abre prioridade de acesso, período inicial de teste e possível condição especial de fundador.</p>
         <div className="feature-grid" style={{ marginTop: 24, textAlign: 'left' }}>
-          <div className="feature-card"><b>01</b><h3>Acesso antecipado</h3><p>Use a plataforma antes da abertura pública e teste o fluxo de preparação bíblica assistida.</p></div>
-          <div className="feature-card"><b>02</b><h3>Condição de fundador</h3><p>Participantes selecionados terão prioridade e oferta especial quando a assinatura for liberada.</p></div>
-          <div className="feature-card"><b>03</b><h3>Vagas limitadas</h3><p>A liberação será gradual para manter qualidade, estabilidade e acompanhamento do uso real.</p></div>
+          <div className="feature-card"><b>01</b><h3>Acesso antes do público</h3><p>Teste o fluxo de preparação bíblica assistida antes do lançamento aberto.</p></div>
+          <div className="feature-card"><b>02</b><h3>Oferta de fundador</h3><p>Usuários selecionados poderão receber preço ou condição especial no lançamento.</p></div>
+          <div className="feature-card"><b>03</b><h3>Vagas limitadas</h3><p>A liberação será gradual para manter estabilidade, suporte e qualidade do produto.</p></div>
         </div>
         {betaStatus === 'ok' ? <p className="badge" style={{ margin: '24px auto 18px' }}>Solicitação recebida. Entraremos em contato.</p> : null}
         {betaStatus === 'invalid' ? <p className="badge" style={{ margin: '24px auto 18px' }}>Preencha nome, e-mail e WhatsApp.</p> : null}
@@ -146,8 +137,8 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             <div className="field"><label>Maior dificuldade</label><select name="main_challenge" required><option>Exegese</option><option>Estrutura da mensagem</option><option>Aplicação pastoral</option><option>Falta de tempo</option><option>Revisão teológica</option><option>Slides ou material de apoio</option><option>Clareza na comunicação</option></select></div>
             <div className="field full"><label>O que faria o Verbum valer uma assinatura para você ou sua igreja?</label><textarea name="expectation" rows={4} /></div>
           </div>
-          <button className="btn btn-gold" type="submit">Solicitar acesso antecipado</button>
-          <p className="muted" style={{ marginTop: 16 }}>Ao enviar, você concorda em ser contatado sobre o acesso antecipado, teste inicial e planos futuros. Leia também: <Link href="/uso-responsavel">uso responsável</Link> e <Link href="/privacidade">privacidade</Link>.</p>
+          <button className="btn btn-gold" type="submit">Solicitar acesso fundador</button>
+          <p className="muted" style={{ marginTop: 16 }}>Ao enviar, você concorda em ser contatado sobre acesso antecipado, teste inicial e planos futuros. Leia também: <Link href="/uso-responsavel">uso responsável</Link> e <Link href="/privacidade">privacidade</Link>.</p>
         </form>
       </section>
     </main>
