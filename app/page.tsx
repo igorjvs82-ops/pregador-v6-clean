@@ -147,10 +147,11 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       </section>
 
       <section id="planos" className="marketing-section">
-        <div className="section-heading"><span className="kicker">Planos</span><h2>Comece com acesso antecipado. Evolua para o plano certo.</h2><p className="lead">Os valores abaixo são a oferta prevista para o lançamento. Participantes selecionados no acesso antecipado poderão receber condição especial de fundador.</p></div>
+        <div className="section-heading"><span className="kicker">Planos</span><h2>Comece com acesso inicial. Evolua para o plano certo.</h2><p className="lead">Os valores abaixo são a oferta prevista para o lançamento. Participantes selecionados no acesso antecipado poderão receber condição especial de fundador.</p></div>
         <div className="feature-grid">
-          <div className="feature-card"><b>Essencial</b><h3>R$ 0</h3><p>Uso limitado para conhecer o fluxo: preparação básica, histórico inicial e acesso a recursos essenciais.</p></div>
-          <div className="feature-card" style={{ borderColor: 'var(--primary-light)', boxShadow: 'var(--shadow-premium)' }}><b>Pregador</b><h3>R$ 49/mês</h3><p>Preparações, Radar Teológico, biblioteca, teleprompter, slides e exportações para quem prega com frequência.</p></div>
+          <div className="feature-card"><b>Acesso inicial</b><h3>R$ 0</h3><p>Teste inicial com limite de uso para conhecer o fluxo de preparação bíblica assistida.</p></div>
+          <div className="feature-card"><b>Essencial</b><h3>R$ 39/mês</h3><p>Preparações básicas, histórico, Radar limitado e exportação simples para uso individual.</p></div>
+          <div className="feature-card" style={{ borderColor: 'var(--primary-light)', boxShadow: 'var(--shadow-premium)' }}><b>Pregador</b><h3>R$ 79/mês</h3><p>Preparações ampliadas, Radar completo, biblioteca, teleprompter, slides e exportações.</p></div>
           <div className="feature-card"><b>Igreja</b><h3>R$ 149/mês</h3><p>Múltiplos pregadores, séries, biblioteca da igreja, materiais de ensino e fluxo para equipes.</p></div>
         </div>
       </section>
