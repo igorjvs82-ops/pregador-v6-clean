@@ -17,17 +17,19 @@ async function createSermon(formData: FormData) {
     duration_minutes: Number(formData.get('duration_minutes') ?? 30),
     occasion: String(formData.get('occasion') ?? ''),
     tone: String(formData.get('tone') ?? ''),
+    spiritual_goal: String(formData.get('spiritual_goal') ?? ''),
+    sensitive_points: String(formData.get('sensitive_points') ?? ''),
   };
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://pregador-v6-clean-igor-santos-projects-cb9f18a1.vercel.app';
   const response = await fetch(`${baseUrl}/api/gerar-mensagem`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
 
-  if (!response.ok) throw new Error('Falha ao gerar preparacao.');
+  if (!response.ok) throw new Error('Falha ao gerar preparação.');
   const generated = await response.json();
 
   const { data, error } = await supabase.from('sermons').insert({
     user_id: user.id,
-    title: generated.outline?.title ?? payload.theme ?? 'Nova preparacao',
+    title: generated.outline?.title ?? payload.theme ?? 'Nova preparação',
     biblical_text: payload.biblical_text,
     theme: payload.theme,
     audience: payload.audience,
@@ -35,6 +37,8 @@ async function createSermon(formData: FormData) {
     duration_minutes: payload.duration_minutes,
     occasion: payload.occasion,
     tone: payload.tone,
+    spiritual_goal: payload.spiritual_goal,
+    sensitive_points: payload.sensitive_points,
     input: payload,
     outline: generated.outline,
     theological_review: generated.theological_review,
@@ -55,21 +59,69 @@ export default async function NewSermonPage() {
 
   return (
     <main className="app-shell">
-      <aside className="sidebar"><div><div className="logo"><span className="logo-mark">V</span><span>Verbum</span></div><nav className="nav"><Link href="/dashboard">Painel</Link><Link href="/mensagens/nova">Nova preparacao</Link><Link href="/">Landing</Link></nav></div><p className="sidebar-note">Gere uma base revisavel. Revise texto, contexto e aplicacoes antes de pregar.</p></aside>
+      <aside className="sidebar">
+        <div>
+          <div className="logo"><span className="logo-mark">V</span><span>Verbum</span></div>
+          <nav className="nav">
+            <Link href="/dashboard">Painel</Link>
+            <Link href="/mensagens/nova">Nova preparação</Link>
+            <Link href="/#planos">Planos</Link>
+            <Link href="/uso-responsavel">Uso responsável</Link>
+          </nav>
+        </div>
+        <p className="sidebar-note">Gere uma base revisável. Revise texto, contexto e aplicações antes de pregar.</p>
+      </aside>
+
       <section className="grid">
-        <div><span className="eyebrow">Verbum Prepare</span><h1 className="h2" style={{ marginTop: 12 }}>Nova preparacao biblica</h1><p className="muted">Preencha os dados essenciais para gerar uma base biblica estruturada e uma revisao teologica inicial.</p></div>
-        <form className="card" action={createSermon}>
-          <div className="form-grid">
-            <div className="field full"><label>Texto biblico</label><input name="biblical_text" placeholder="Ex.: Efesios 2.1-10" required /></div>
-            <div className="field"><label>Tema</label><input name="theme" placeholder="Ex.: Salvos pela graca" required /></div>
-            <div className="field"><label>Publico</label><input name="audience" placeholder="Ex.: jovens, igreja local, celula" required /></div>
-            <div className="field"><label>Tipo</label><select name="sermon_type" defaultValue="expositiva"><option value="expositiva">Expositiva</option><option value="tematica">Tematica</option><option value="evangelistica">Evangelistica</option><option value="doutrinaria">Doutrinaria</option><option value="devocional">Devocional</option><option value="celula">Celula</option></select></div>
-            <div className="field"><label>Duracao</label><input name="duration_minutes" type="number" defaultValue="30" min="5" max="90" /></div>
-            <div className="field"><label>Ocasiao</label><input name="occasion" placeholder="Ex.: culto de domingo" /></div>
-            <div className="field"><label>Tom</label><input name="tone" placeholder="Ex.: pastoral e claro" /></div>
-          </div>
-          <div className="actions" style={{ marginTop: 10 }}><button className="btn" type="submit">Gerar base revisavel</button><Link className="btn btn-secondary" href="/dashboard">Cancelar</Link></div>
-        </form>
+        <div className="card" style={{ padding: 34, background: 'linear-gradient(135deg, #fff, #fbf8ff)', boxShadow: 'var(--shadow-premium)' }}>
+          <span className="eyebrow">Verbum Prepare</span>
+          <h1 className="h2" style={{ marginTop: 16 }}>Nova preparação bíblica</h1>
+          <p className="lead" style={{ fontSize: 17 }}>Informe o texto, o público e a intenção pastoral. O Verbum organizará uma base inicial com estrutura homilética e revisão teológica para você avaliar.</p>
+        </div>
+
+        <div className="grid-2">
+          <form className="card" action={createSermon} style={{ boxShadow: 'var(--shadow-premium)' }}>
+            <div className="section-title">
+              <div>
+                <p className="kicker">Dados da mensagem</p>
+                <h2 style={{ margin: 0 }}>Contexto bíblico e pastoral</h2>
+              </div>
+            </div>
+
+            <div className="form-grid">
+              <div className="field full"><label>Texto bíblico</label><input name="biblical_text" placeholder="Ex.: Efésios 2.1-10" required /></div>
+              <div className="field"><label>Tema ou direção</label><input name="theme" placeholder="Ex.: Salvos pela graça" required /></div>
+              <div className="field"><label>Público</label><input name="audience" placeholder="Ex.: igreja local, jovens, célula" required /></div>
+              <div className="field"><label>Tipo</label><select name="sermon_type" defaultValue="expositiva"><option value="expositiva">Expositiva</option><option value="textual">Textual</option><option value="tematica">Temática</option><option value="evangelistica">Evangelística</option><option value="doutrinaria">Doutrinária</option><option value="devocional">Devocional</option><option value="estudo_biblico">Estudo bíblico</option><option value="celula">Célula</option></select></div>
+              <div className="field"><label>Duração estimada</label><input name="duration_minutes" type="number" defaultValue="30" min="5" max="90" /></div>
+              <div className="field"><label>Ocasião</label><input name="occasion" placeholder="Ex.: culto de domingo" /></div>
+              <div className="field"><label>Tom desejado</label><input name="tone" placeholder="Ex.: pastoral, claro e expositivo" /></div>
+              <div className="field full"><label>Objetivo espiritual</label><textarea name="spiritual_goal" rows={3} placeholder="Ex.: levar a igreja a descansar na graça de Cristo e responder com gratidão." /></div>
+              <div className="field full"><label>Pontos sensíveis para considerar</label><textarea name="sensitive_points" rows={3} placeholder="Ex.: evitar moralismo, considerar visitantes, tratar culpa com cuidado pastoral." /></div>
+            </div>
+
+            <div className="actions" style={{ marginTop: 10 }}><button className="btn" type="submit">Gerar base revisável</button><Link className="btn btn-secondary" href="/dashboard">Cancelar</Link></div>
+            <p className="footer-note" style={{ marginTop: 20 }}>A geração é ponto de partida. Leia, corrija, ajuste aplicações e aprove somente o que estiver fiel ao texto.</p>
+          </form>
+
+          <aside className="grid">
+            <div className="card">
+              <span className="badge">Como funciona</span>
+              <h3>O que será gerado?</h3>
+              <p className="muted">Uma base com título, proposição, estrutura, aplicações, oração e Radar Teológico. Nada deve ser usado sem revisão pastoral.</p>
+            </div>
+            <div className="card">
+              <span className="badge">Critério pastoral</span>
+              <h3>Revise antes de pregar.</h3>
+              <p className="muted">Confira contexto, doutrina, tom, aplicações e possíveis exageros. O Verbum apoia o processo, mas não decide pelo pregador.</p>
+            </div>
+            <div className="card">
+              <span className="badge">Sugestão</span>
+              <h3>Quanto mais contexto, melhor.</h3>
+              <p className="muted">Inclua ocasião, público, objetivo espiritual e pontos sensíveis para que a base seja mais útil à sua realidade.</p>
+            </div>
+          </aside>
+        </div>
       </section>
     </main>
   );
