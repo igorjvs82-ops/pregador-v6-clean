@@ -83,7 +83,8 @@ export default async function SermonDetailPage({ params }: { params: Promise<{ i
           {proposition ? <p className="footer-note"><strong>Proposição:</strong> {proposition}</p> : null}
           <div className="actions" style={{ marginTop: 22 }}>
             <Link className="btn btn-secondary" href="/dashboard">Voltar ao painel</Link>
-            <Link className="btn" href="/mensagens/nova">Nova preparação</Link>
+            <Link className="btn" href={`/mensagens/${id}/teleprompter`}>Abrir teleprompter</Link>
+            <Link className="btn btn-secondary" href="/mensagens/nova">Nova preparação</Link>
           </div>
         </div>
 
@@ -127,11 +128,11 @@ export default async function SermonDetailPage({ params }: { params: Promise<{ i
             </div>
           </div>
           <div className="feature-grid">
-            <div className="feature-card"><b>Teleprompter</b><h3>Roteiro de púlpito</h3><p>Gerar uma visualização limpa por blocos para ensaio e apoio durante a exposição.</p></div>
+            <Link className="feature-card" href={`/mensagens/${id}/teleprompter`}><b>Teleprompter</b><h3>Roteiro de púlpito</h3><p>Abrir visualização limpa por blocos para ensaio e apoio durante a exposição.</p></Link>
             <div className="feature-card"><b>Slides</b><h3>Apoio visual</h3><p>Transformar título, pontos e aplicações em uma estrutura de slides para culto ou estudo.</p></div>
             <div className="feature-card"><b>Exportar</b><h3>Material final</h3><p>Salvar como roteiro, resumo, material de apoio ou conteúdo para compartilhar com a equipe.</p></div>
           </div>
-          <p className="footer-note" style={{ marginTop: 22 }}>Essas ações serão liberadas gradualmente. Antes de exportar ou apresentar, revise e aprove pastoralmente a preparação.</p>
+          <p className="footer-note" style={{ marginTop: 22 }}>Antes de exportar ou apresentar, revise e aprove pastoralmente a preparação.</p>
         </section>
       </section>
     </main>
