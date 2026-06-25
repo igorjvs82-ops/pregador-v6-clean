@@ -43,35 +43,35 @@ function LoginForm() {
   }
 
   return (
-    <main className="auth-page">
-      <section className="auth-shell">
-        <div className="auth-panel auth-brand-panel">
-          <Link href="/" className="brand-lockup"><span className="logo-mark">V</span><span>Verbum</span></Link>
+    <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', padding: 24 }}>
+      <section style={{ width: '100%', maxWidth: 1120, display: 'grid', gridTemplateColumns: '1fr 0.86fr', gap: 24 }}>
+        <div className="card" style={{ padding: 34, minHeight: 560, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: 'linear-gradient(135deg, var(--hero-1), var(--hero-2))', color: '#fff', boxShadow: 'var(--shadow-premium)' }}>
+          <Link href="/" className="brand-lockup" style={{ color: '#fff' }}><span className="logo-mark">V</span><span>Verbum</span></Link>
           <div>
             <span className="eyebrow">Acesso antecipado</span>
-            <h1 className="auth-title">Prepare com ordem. Revise com discernimento.</h1>
-            <p className="lead">Acesse o ambiente do Verbum para organizar preparações bíblicas, revisar riscos teológicos e salvar suas mensagens como bases revisáveis.</p>
+            <h1 style={{ fontSize: 'clamp(40px, 6vw, 66px)', lineHeight: 0.95, letterSpacing: '-0.065em', margin: '22px 0 18px' }}>Prepare com ordem. Revise com discernimento.</h1>
+            <p style={{ color: 'rgba(255,255,255,.72)', fontSize: 18, lineHeight: 1.65, maxWidth: 640 }}>Acesse o ambiente do Verbum para organizar preparações bíblicas, revisar riscos teológicos e salvar suas mensagens como bases revisáveis.</p>
           </div>
-          <div className="checklist auth-checklist">
+          <div className="checklist" style={{ background: 'rgba(255,255,255,.08)', borderColor: 'rgba(255,255,255,.16)' }}>
             <p>✓ Base revisável, nunca sermão pronto</p>
             <p>✓ Radar Teológico para pontos de atenção</p>
             <p>✓ Aprovação final sempre do pregador</p>
           </div>
         </div>
 
-        <div className="auth-panel auth-form-panel">
+        <div className="card" style={{ padding: 34, alignSelf: 'center', boxShadow: 'var(--shadow-premium)' }}>
           <p className="kicker">Entrar no app</p>
-          <h2>Receba seu link de acesso</h2>
-          <p className="muted">Use este acesso se você já foi liberado para testar o Verbum. O link enviado por e-mail funciona uma vez e pode expirar.</p>
-          <form onSubmit={handleSubmit}>
+          <h2 style={{ fontSize: 38, lineHeight: 1.05, letterSpacing: '-0.04em', margin: '12px 0' }}>Receba seu link de acesso</h2>
+          <p className="muted" style={{ lineHeight: 1.6 }}>Use este acesso se você já foi liberado para testar o Verbum. O link enviado por e-mail funciona uma vez e pode expirar.</p>
+          <form onSubmit={handleSubmit} style={{ marginTop: 24 }}>
             <div className="field">
               <label htmlFor="email">E-mail</label>
               <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="seuemail@exemplo.com" required />
             </div>
             <button className="btn" disabled={loading}>{loading ? 'Enviando...' : 'Enviar novo link de acesso'}</button>
           </form>
-          {message ? <p className="auth-message">{message}</p> : null}
-          <p className="muted" style={{ marginTop: 24 }}>Ainda não foi liberado? <Link href="/#acesso">Solicite acesso antecipado</Link>.</p>
+          {message ? <p style={{ marginTop: 18, color: message.startsWith('Erro') ? 'var(--error)' : 'var(--success)', lineHeight: 1.45 }}>{message}</p> : null}
+          <p className="muted" style={{ marginTop: 24 }}>Ainda não foi liberado? <Link href="/#acesso" style={{ color: 'var(--primary)', fontWeight: 800 }}>Solicite acesso antecipado</Link>.</p>
         </div>
       </section>
     </main>
