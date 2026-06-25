@@ -1,12 +1,22 @@
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 type HomePageProps = {
-  searchParams?: Promise<{ beta?: string }>;
+  searchParams?: Promise<{ beta?: string; code?: string; error?: string; error_code?: string }>;
 };
 
 export default async function HomePage({ searchParams }: HomePageProps) {
   const params = await searchParams;
   const betaStatus = params?.beta;
+
+  if (params?.code) {
+    redirect(`/auth/callback?code=${encodeURIComponent(params.code)}&next=/dashboard`);
+  }
+
+  if (params?.error) {
+    const reason = params.error_code === 'otp_expired' ? 'expired' : 'denied';
+    redirect(`/login?error=${reason}`);
+  }
 
   return (
     <main className="marketing-page">
