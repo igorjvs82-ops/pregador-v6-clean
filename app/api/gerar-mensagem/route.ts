@@ -10,6 +10,8 @@ const schema = z.object({
   duration_minutes: z.number().min(5).max(90).default(30),
   occasion: z.string().max(160).optional(),
   tone: z.string().max(160).optional(),
+  spiritual_goal: z.string().max(500).optional(),
+  sensitive_points: z.string().max(800).optional(),
 });
 
 function fallback(input: z.infer<typeof schema>) {
@@ -17,7 +19,7 @@ function fallback(input: z.infer<typeof schema>) {
     outline: {
       title: input.theme,
       central_theme: `Mensagem em ${input.biblical_text}`,
-      spiritual_objective: 'Conduzir o publico a compreender o texto, contemplar Cristo e responder com fe e obediencia.',
+      spiritual_objective: input.spiritual_goal || 'Conduzir o publico a compreender o texto, contemplar Cristo e responder com fe e obediencia.',
       main_thesis: 'A mensagem deve nascer do texto biblico e apontar para a graca de Deus em Cristo.',
       introduction: 'Introduza a dor real do publico e conecte-a ao texto biblico sem manipulacao emocional.',
       biblical_context: 'Explique o contexto literario, historico e canonico antes de aplicar o texto.',
@@ -28,7 +30,7 @@ function fallback(input: z.infer<typeof schema>) {
       ],
       conclusion: 'Retome a tese, aponte para Cristo e chame a resposta fiel.',
       final_prayer: 'Senhor, aplica tua Palavra ao nosso coracao e conduz-nos a Cristo. Amem.',
-      preacher_note: 'Base revisavel. Confira exegese, contexto, doutrina, exemplos e aplicacoes antes de pregar.'
+      preacher_note: input.sensitive_points ? `Base revisavel. Considere especialmente: ${input.sensitive_points}` : 'Base revisavel. Confira exegese, contexto, doutrina, exemplos e aplicacoes antes de pregar.'
     },
     theological_review: {
       score: 75,
@@ -66,6 +68,8 @@ Metodo obrigatorio:
 4. Evite moralismo, legalismo, triunfalismo, prosperidade, autoajuda gospel e promessas sem base textual.
 5. Use portugues do Brasil, tom pastoral, claro e reverente.
 6. Seja util para pregacao real, mas mantenha alertas de revisao.
+7. Use o objetivo espiritual informado para orientar aplicacoes sem forcar o texto.
+8. Respeite os pontos sensiveis informados e mencione riscos pastorais quando forem relevantes.
 
 Responda apenas JSON valido, sem markdown, com esta estrutura:
 {
