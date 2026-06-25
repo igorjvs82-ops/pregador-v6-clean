@@ -1,24 +1,7 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-
-const planMap = {
-  essencial: {
-    name: 'Essencial',
-    price: 'R$ 39/mês',
-    description: 'Preparações básicas, histórico, Radar limitado e exportação simples.',
-  },
-  pregador: {
-    name: 'Pregador',
-    price: 'R$ 79/mês',
-    description: 'Preparações ampliadas, Radar completo, biblioteca, teleprompter, slides e exportações.',
-  },
-  igreja: {
-    name: 'Igreja',
-    price: 'R$ 149/mês',
-    description: 'Múltiplos pregadores, séries, biblioteca da igreja, materiais de ensino e fluxo para equipes.',
-  },
-};
+import { formatPreparationLimit, getPlanBySlug } from '@/lib/plans';
 
 type CheckoutPageProps = {
   searchParams?: Promise<{ plan?: string }>;
@@ -26,8 +9,7 @@ type CheckoutPageProps = {
 
 export default async function CheckoutPage({ searchParams }: CheckoutPageProps) {
   const params = await searchParams;
-  const selectedKey = params?.plan && params.plan in planMap ? params.plan as keyof typeof planMap : 'pregador';
-  const selectedPlan = planMap[selectedKey];
+  const selectedPlan = getPlanBySlug(params?.plan);
 
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -60,12 +42,11 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
             <span className="badge">Plano selecionado</span>
             <h2 style={{ marginTop: 14 }}>{selectedPlan.name}</h2>
             <h3 style={{ fontSize: 34, margin: '8px 0' }}>{selectedPlan.price}</h3>
-            <p className="muted">{selectedPlan.description}</p>
+            <p className="muted">Limite de preparações: {formatPreparationLimit(selectedPlan)}</p>
             <div className="checklist" style={{ marginTop: 22 }}>
+              {selectedPlan.features.map((feature) => <p key={feature}>✓ {feature}</p>)}
               <p>✓ Cobrança recorrente mensal futuramente</p>
-              <p>✓ Liberação de recursos conforme plano</p>
               <p>✓ Controle de limites por assinatura</p>
-              <p>✓ Cancelamento e alteração de plano em etapa futura</p>
             </div>
           </section>
 
