@@ -22,6 +22,7 @@ export default async function DashboardPage() {
 
   const total = sermons?.length ?? 0;
   const firstName = user.email?.split('@')[0] ?? 'pregador';
+  const latest = sermons?.[0];
 
   return (
     <main className="app-shell">
@@ -31,7 +32,7 @@ export default async function DashboardPage() {
           <nav className="nav">
             <Link href="/dashboard">Painel</Link>
             <Link href="/mensagens/nova">Nova preparação</Link>
-            <Link href="/#planos">Planos</Link>
+            <Link href="/assinatura">Assinatura</Link>
             <Link href="/uso-responsavel">Uso responsável</Link>
           </nav>
         </div>
@@ -53,7 +54,7 @@ export default async function DashboardPage() {
         <div className="grid-3">
           <div className="stat"><strong>{total}</strong><span className="muted">preparações recentes</span></div>
           <div className="stat"><strong>Radar</strong><span className="muted">revisão teológica</span></div>
-          <div className="stat"><strong>Beta</strong><span className="muted">acesso antecipado</span></div>
+          <div className="stat"><strong>Essencial</strong><span className="muted">plano atual</span></div>
         </div>
 
         <div className="grid-2">
@@ -64,12 +65,30 @@ export default async function DashboardPage() {
             <Link className="btn btn-gold" href="/mensagens/nova">Começar preparação</Link>
           </div>
           <div className="card">
-            <span className="badge">Método Verbum</span>
-            <h2 style={{ marginTop: 14 }}>Revise antes de pregar.</h2>
-            <p className="muted">Use o Radar como apoio para observar fidelidade textual, contexto, doutrina, aplicação e clareza homilética.</p>
-            <Link className="btn btn-secondary" href="/uso-responsavel">Ver uso responsável</Link>
+            <span className="badge">Assinatura</span>
+            <h2 style={{ marginTop: 14 }}>Veja os planos previstos.</h2>
+            <p className="muted">Durante o acesso antecipado, os planos servem como referência. Checkout e cobrança serão ativados em etapa posterior.</p>
+            <Link className="btn btn-secondary" href="/assinatura">Ver assinatura</Link>
           </div>
         </div>
+
+        {latest ? (
+          <section className="card">
+            <div className="section-title">
+              <div>
+                <p className="kicker">Continuar</p>
+                <h2 style={{ margin: 0 }}>Última preparação</h2>
+              </div>
+              <Link className="btn btn-secondary" href={`/mensagens/${latest.id}`}>Abrir</Link>
+            </div>
+            <div className="feature-grid">
+              <Link className="feature-card" href={`/mensagens/${latest.id}`}><b>Resultado</b><h3>{latest.title || latest.theme || latest.biblical_text}</h3><p>{latest.biblical_text}</p></Link>
+              <Link className="feature-card" href={`/mensagens/${latest.id}/teleprompter`}><b>Teleprompter</b><h3>Roteiro de púlpito</h3><p>Abrir modo limpo para ensaio e apoio.</p></Link>
+              <Link className="feature-card" href={`/mensagens/${latest.id}/slides`}><b>Slides</b><h3>Apoio visual</h3><p>Visualizar estrutura de slides gerada.</p></Link>
+              <Link className="feature-card" href={`/mensagens/${latest.id}/exportar`}><b>Exportar</b><h3>Texto estruturado</h3><p>Copiar roteiro revisável completo.</p></Link>
+            </div>
+          </section>
+        ) : null}
 
         <section className="card">
           <div className="section-title">
