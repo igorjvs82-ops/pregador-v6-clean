@@ -43,29 +43,45 @@ function LoginForm() {
   }
 
   return (
-    <section className="card" style={{ maxWidth: 560, margin: '0 auto' }}>
-      <p style={{ fontWeight: 800, letterSpacing: 1, textTransform: 'uppercase', color: '#7c5fd3' }}>Verbum</p>
-      <h1>Entrar no app</h1>
-      <p style={{ color: '#6b6377' }}>Use este acesso se você já foi liberado para testar o Verbum. O link enviado por e-mail só funciona uma vez e pode expirar.</p>
-      <form onSubmit={handleSubmit}>
-        <div className="field">
-          <label htmlFor="email">E-mail</label>
-          <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+    <main className="auth-page">
+      <section className="auth-shell">
+        <div className="auth-panel auth-brand-panel">
+          <Link href="/" className="brand-lockup"><span className="logo-mark">V</span><span>Verbum</span></Link>
+          <div>
+            <span className="eyebrow">Acesso antecipado</span>
+            <h1 className="auth-title">Prepare com ordem. Revise com discernimento.</h1>
+            <p className="lead">Acesse o ambiente do Verbum para organizar preparações bíblicas, revisar riscos teológicos e salvar suas mensagens como bases revisáveis.</p>
+          </div>
+          <div className="checklist auth-checklist">
+            <p>✓ Base revisável, nunca sermão pronto</p>
+            <p>✓ Radar Teológico para pontos de atenção</p>
+            <p>✓ Aprovação final sempre do pregador</p>
+          </div>
         </div>
-        <button className="btn" disabled={loading}>{loading ? 'Enviando...' : 'Enviar novo link de acesso'}</button>
-      </form>
-      {message ? <p style={{ marginTop: 16 }}>{message}</p> : null}
-      <p className="muted" style={{ marginTop: 24 }}>Ainda não foi liberado? <Link href="/#beta">Solicite acesso antecipado</Link>.</p>
-    </section>
+
+        <div className="auth-panel auth-form-panel">
+          <p className="kicker">Entrar no app</p>
+          <h2>Receba seu link de acesso</h2>
+          <p className="muted">Use este acesso se você já foi liberado para testar o Verbum. O link enviado por e-mail funciona uma vez e pode expirar.</p>
+          <form onSubmit={handleSubmit}>
+            <div className="field">
+              <label htmlFor="email">E-mail</label>
+              <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="seuemail@exemplo.com" required />
+            </div>
+            <button className="btn" disabled={loading}>{loading ? 'Enviando...' : 'Enviar novo link de acesso'}</button>
+          </form>
+          {message ? <p className="auth-message">{message}</p> : null}
+          <p className="muted" style={{ marginTop: 24 }}>Ainda não foi liberado? <Link href="/#acesso">Solicite acesso antecipado</Link>.</p>
+        </div>
+      </section>
+    </main>
   );
 }
 
 export default function LoginPage() {
   return (
-    <main className="container">
-      <Suspense fallback={<section className="card" style={{ maxWidth: 560, margin: '0 auto' }}>Carregando acesso...</section>}>
-        <LoginForm />
-      </Suspense>
-    </main>
+    <Suspense fallback={<main className="container"><section className="card" style={{ maxWidth: 560, margin: '0 auto' }}>Carregando acesso...</section></main>}>
+      <LoginForm />
+    </Suspense>
   );
 }
