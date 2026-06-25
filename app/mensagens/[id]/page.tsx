@@ -20,18 +20,18 @@ export default async function SermonDetailPage({ params }: { params: Promise<{ i
 
   return (
     <main className="app-shell">
-      <aside className="sidebar"><div><div className="logo"><span className="logo-mark">P</span><span>Pregador.app</span></div><nav className="nav"><Link href="/dashboard">Painel</Link><Link href="/mensagens/nova">Nova mensagem</Link><Link href="/">Página inicial</Link></nav></div><p className="sidebar-note">Leia, ajuste e aprove a mensagem antes de usar no púlpito.</p></aside>
+      <aside className="sidebar"><div><div className="logo"><span className="logo-mark">V</span><span>Verbum</span></div><nav className="nav"><Link href="/dashboard">Painel</Link><Link href="/mensagens/nova">Nova preparacao</Link><Link href="/">Landing</Link></nav></div><p className="sidebar-note">Leia, ajuste e aprove a preparacao antes de usar no pulpito.</p></aside>
       <section className="grid">
         <div className="card">
           <span className="badge">{sermon.status}</span>
           <h1 className="h2" style={{ marginTop: 14 }}>{sermon.title}</h1>
           <p className="lead" style={{ fontSize: 18 }}>{sermon.biblical_text} • {sermon.theme}</p>
-          <div className="actions"><Link className="btn btn-secondary" href="/dashboard">Voltar ao painel</Link><Link className="btn" href="/mensagens/nova">Nova mensagem</Link></div>
+          <div className="actions"><Link className="btn btn-secondary" href="/dashboard">Voltar ao painel</Link><Link className="btn" href="/mensagens/nova">Nova preparacao</Link></div>
         </div>
 
         <div className="grid-2">
-          <section className="card"><p className="kicker">Esboço gerado</p><h2>Estrutura da mensagem</h2><JsonBlock data={outline} /></section>
-          <section className="card"><p className="kicker">Revisão pastoral</p><h2>Alertas e ajustes</h2><JsonBlock data={review} /></section>
+          <section className="card"><p className="kicker">Base gerada</p><h2>Estrutura da mensagem</h2><JsonBlock data={outline} /></section>
+          <section className="card"><p className="kicker">Verbum Radar</p><h2>Alertas e ajustes</h2><JsonBlock data={review} /></section>
         </div>
       </section>
     </main>
