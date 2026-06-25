@@ -26,7 +26,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       <section className="marketing-hero">
         <div className="hero-copy">
           <span className="eyebrow">Acesso antecipado para pregadores</span>
-          <h1 className="marketing-title">Prepare mensagens bíblicas com clareza, revisão teológica e fidelidade ao texto.</h1>
+          <h1 className="marketing-title">Do texto à mensagem, com clareza.</h1>
           <p className="lead">Verbum é uma plataforma de preparação bíblica assistida que ajuda pregadores a organizar exegese, proposição, estrutura homilética, aplicações e alertas teológicos. Sempre como base revisável, nunca como substituto do pregador.</p>
           <div className="actions"><a className="btn btn-gold" href="#acesso">Solicitar acesso antecipado</a><a className="btn btn-secondary" href="#exemplo">Ver exemplo</a></div>
           <p className="trust-line">A ferramenta auxilia. O pregador estuda, ora, discerne, revisa e aprova.</p>
