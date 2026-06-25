@@ -13,8 +13,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       <header className="marketing-nav">
         <Link href="/" className="brand-lockup"><span className="logo-mark">V</span><span>Verbum</span></Link>
         <nav className="marketing-links">
-          <a href="#confianca">Confiança</a>
-          <a href="#como-funciona">Como funciona</a>
+          <a href="#funcionalidades">Funcionalidades</a>
           <a href="#radar">Radar</a>
           <a href="#planos">Planos</a>
           <a href="#faq">FAQ</a>
@@ -27,16 +26,16 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         <div className="hero-copy">
           <span className="eyebrow">Preparação bíblica assistida</span>
           <h1 className="marketing-title">Do texto à mensagem, com clareza.</h1>
-          <p className="lead">Organize exegese, estrutura homilética, aplicações e revisão teológica em um fluxo sério de preparação — sempre como base revisável, nunca como substituto do pregador.</p>
-          <div className="actions"><a className="btn btn-gold" href="#acesso">Solicitar acesso antecipado</a><a className="btn btn-secondary" href="#planos">Ver planos</a></div>
+          <p className="lead">Prepare, revise, organize e apresente mensagens bíblicas em um fluxo pastoral completo — da exegese ao teleprompter, sempre como base revisável.</p>
+          <div className="actions"><a className="btn btn-gold" href="#acesso">Solicitar acesso antecipado</a><a className="btn btn-secondary" href="#funcionalidades">Ver funcionalidades</a></div>
           <p className="trust-line">Para pastores, pregadores e líderes que querem ganhar clareza sem terceirizar o púlpito.</p>
         </div>
         <div className="product-mockup">
           <div className="mockup-top"><span></span><span></span><span></span><strong>Verbum Prepare</strong></div>
           <div className="mockup-body">
             <div className="mockup-panel wide"><small>Texto bíblico</small><strong>Romanos 8.1</strong></div>
-            <div className="mockup-panel"><small>Proposição</small><strong>Nenhuma condenação em Cristo</strong></div>
-            <div className="mockup-panel"><small>Público</small><strong>Igreja local</strong></div>
+            <div className="mockup-panel"><small>Teleprompter</small><strong>Roteiro limpo para pregação</strong></div>
+            <div className="mockup-panel"><small>Slides</small><strong>Pontos principais e aplicações</strong></div>
             <div className="mockup-panel wide dark"><small>Radar teológico</small><strong>Contexto preservado · Cristo central · Aplicação pastoral</strong></div>
           </div>
         </div>
@@ -72,7 +71,22 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         <div className="feature-grid">
           <div className="feature-card"><b>01</b><h3>Informe o texto e o contexto</h3><p>Passagem, tema, ocasião, público, duração e objetivo espiritual.</p></div>
           <div className="feature-card"><b>02</b><h3>Receba uma base revisável</h3><p>Exegese, proposição, estrutura homilética, aplicações, apelo e oração.</p></div>
-          <div className="feature-card"><b>03</b><h3>Revise com critério</h3><p>Alertas sobre contexto, doutrina, moralismo, aplicação e clareza homilética.</p></div>
+          <div className="feature-card"><b>03</b><h3>Revise, exporte e apresente</h3><p>Use Radar Teológico, roteiro de púlpito, teleprompter, slides e biblioteca para organizar o uso final.</p></div>
+        </div>
+      </section>
+
+      <section id="funcionalidades" className="marketing-section">
+        <div className="section-heading"><span className="kicker">Funcionalidades</span><h2>Mais que uma IA de texto. Um fluxo completo para preparação pastoral.</h2><p className="lead">O Verbum combina preparação, revisão, organização e apresentação para apoiar o trabalho real de quem prega e ensina.</p></div>
+        <div className="feature-grid">
+          <div className="feature-card"><b>Prepare</b><h3>Preparação bíblica assistida</h3><p>Exegese, proposição, estrutura, aplicações e oração em uma base inicial para revisão.</p></div>
+          <div className="feature-card"><b>Revise</b><h3>Radar Teológico</h3><p>Alertas sobre contexto, moralismo, triunfalismo, aplicação forçada e riscos doutrinários.</p></div>
+          <div className="feature-card"><b>Pregue</b><h3>Teleprompter pastoral</h3><p>Roteiro limpo para leitura, ensaio ou apoio durante exposição, com blocos por tópico.</p></div>
+          <div className="feature-card"><b>Apresente</b><h3>Slides automáticos</h3><p>Título, pontos principais, textos bíblicos e aplicações em estrutura visual para culto ou estudo.</p></div>
+          <div className="feature-card"><b>Organize</b><h3>Biblioteca pastoral</h3><p>Histórico por texto, tema, série, público e ocasião para reutilizar e amadurecer preparações.</p></div>
+          <div className="feature-card"><b>Planeje</b><h3>Séries de mensagens</h3><p>Organização de campanhas, séries expositivas, estudos bíblicos e calendário de ensino.</p></div>
+          <div className="feature-card"><b>Exporte</b><h3>Materiais prontos para uso</h3><p>Roteiro de púlpito, resumo, apoio para WhatsApp, slides e formatos para compartilhamento.</p></div>
+          <div className="feature-card"><b>Aprove</b><h3>Revisão e aprovação</h3><p>Nada deve ser tratado como final sem leitura, edição e aprovação bíblica e pastoral.</p></div>
+          <div className="feature-card"><b>Igreja</b><h3>Fluxo para equipes</h3><p>Base futura para líderes, professores, séries da igreja e padronização de materiais de ensino.</p></div>
         </div>
       </section>
 
@@ -117,7 +131,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           <div className="card" style={{ borderColor: 'var(--primary-light)', boxShadow: 'var(--shadow-premium)' }}>
             <span className="badge">Verbum</span>
             <h3 style={{ fontSize: 28 }}>Preparação guiada, revisável e orientada ao púlpito.</h3>
-            <p className="muted">O foco não é entregar um sermão pronto, mas organizar o processo: texto, contexto, proposição, estrutura, aplicação, Radar Teológico e aprovação final do pregador.</p>
+            <p className="muted">O foco não é entregar um sermão pronto, mas organizar o processo: texto, contexto, proposição, estrutura, aplicação, Radar Teológico, teleprompter, slides e aprovação final do pregador.</p>
           </div>
         </div>
       </section>
@@ -125,9 +139,9 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       <section id="planos" className="marketing-section">
         <div className="section-heading"><span className="kicker">Planos</span><h2>Comece com acesso antecipado. Evolua para o plano certo.</h2><p className="lead">Os valores abaixo são a oferta prevista para o lançamento. Participantes selecionados no acesso antecipado poderão receber condição especial de fundador.</p></div>
         <div className="feature-grid">
-          <div className="feature-card"><b>Essencial</b><h3>R$ 0</h3><p>Para conhecer o fluxo. Inclui uso limitado, histórico básico e acesso inicial à preparação bíblica assistida.</p></div>
-          <div className="feature-card" style={{ borderColor: 'var(--primary-light)', boxShadow: 'var(--shadow-premium)' }}><b>Pregador</b><h3>R$ 49/mês</h3><p>Para uso individual: preparações, Radar Teológico, revisão, histórico e exportação. Plano recomendado para quem prega com frequência.</p></div>
-          <div className="feature-card"><b>Igreja</b><h3>R$ 149/mês</h3><p>Para equipes: múltiplos pregadores, séries, biblioteca da igreja e padronização de materiais de ensino.</p></div>
+          <div className="feature-card"><b>Essencial</b><h3>R$ 0</h3><p>Uso limitado para conhecer o fluxo: preparação básica, histórico inicial e acesso a recursos essenciais.</p></div>
+          <div className="feature-card" style={{ borderColor: 'var(--primary-light)', boxShadow: 'var(--shadow-premium)' }}><b>Pregador</b><h3>R$ 49/mês</h3><p>Preparações, Radar Teológico, biblioteca, teleprompter, slides e exportações para quem prega com frequência.</p></div>
+          <div className="feature-card"><b>Igreja</b><h3>R$ 149/mês</h3><p>Múltiplos pregadores, séries, biblioteca da igreja, materiais de ensino e fluxo para equipes.</p></div>
         </div>
       </section>
 
@@ -136,8 +150,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         <div className="grid-2">
           <div className="card"><h3>O Verbum cria sermões prontos?</h3><p className="muted">Não. Ele gera uma base revisável para preparação. O pregador continua responsável por estudar, revisar, editar e aprovar.</p></div>
           <div className="card"><h3>O acesso antecipado será gratuito para sempre?</h3><p className="muted">Não. O acesso inicial serve para teste e validação. Os selecionados poderão receber condição especial quando os planos pagos forem abertos.</p></div>
+          <div className="card"><h3>Teleprompter e slides já fazem parte do produto?</h3><p className="muted">Eles fazem parte da direção do produto e entram como recursos do fluxo Verbum. A liberação poderá ser gradual durante o acesso antecipado.</p></div>
           <div className="card"><h3>Posso usar para EBD, célula ou estudo bíblico?</h3><p className="muted">Sim. O foco inicial é pregação, mas o fluxo também atende ensino bíblico, pequenos grupos e estudos pastorais.</p></div>
           <div className="card"><h3>O Radar Teológico garante que não haverá erro?</h3><p className="muted">Não. Ele aponta riscos e pontos de atenção, mas não substitui Bíblia, confissão, supervisão pastoral ou discernimento do pregador.</p></div>
+          <div className="card"><h3>O plano Igreja é para quem?</h3><p className="muted">Para igrejas que desejam organizar pregadores, professores, séries de mensagens e materiais de ensino em um mesmo ambiente.</p></div>
         </div>
       </section>
 
