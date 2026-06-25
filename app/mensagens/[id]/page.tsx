@@ -131,7 +131,7 @@ export default async function SermonDetailPage({ params }: { params: Promise<{ i
           <div className="feature-grid">
             <Link className="feature-card" href={`/mensagens/${id}/teleprompter`}><b>Teleprompter</b><h3>Roteiro de púlpito</h3><p>Abrir visualização limpa por blocos para ensaio e apoio durante a exposição.</p></Link>
             <Link className="feature-card" href={`/mensagens/${id}/slides`}><b>Slides</b><h3>Apoio visual</h3><p>Transformar título, pontos e aplicações em uma estrutura de slides para culto ou estudo.</p></Link>
-            <div className="feature-card"><b>Exportar</b><h3>Material final</h3><p>Salvar como roteiro, resumo, material de apoio ou conteúdo para compartilhar com a equipe.</p></div>
+            <Link className="feature-card" href={`/mensagens/${id}/exportar`}><b>Exportar</b><h3>Material final</h3><p>Salvar como roteiro, resumo, material de apoio ou conteúdo para compartilhar com a equipe.</p></Link>
           </div>
           <p className="footer-note" style={{ marginTop: 22 }}>Antes de exportar ou apresentar, revise e aprove pastoralmente a preparação.</p>
         </section>
