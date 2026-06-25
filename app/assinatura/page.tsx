@@ -16,16 +16,16 @@ const plans = [
     price: 'R$ 39/mês',
     description: 'Para pregadores que precisam de preparação básica e organização.',
     features: ['Preparações básicas', 'Radar limitado', 'Histórico de mensagens', 'Exportação simples'],
-    cta: 'Entrar na lista',
-    href: '/#acesso',
+    cta: 'Selecionar Essencial',
+    href: '/checkout?plan=essencial',
   },
   {
     name: 'Pregador',
     price: 'R$ 79/mês',
     description: 'Para quem prega, ensina ou lidera com frequência.',
     features: ['Preparações ampliadas', 'Radar Teológico completo', 'Teleprompter pastoral', 'Slides e exportação textual', 'Biblioteca de mensagens'],
-    cta: 'Entrar na lista',
-    href: '/#acesso',
+    cta: 'Selecionar Pregador',
+    href: '/checkout?plan=pregador',
     featured: true,
   },
   {
@@ -33,8 +33,8 @@ const plans = [
     price: 'R$ 149/mês',
     description: 'Para equipes pastorais, professores e séries da igreja.',
     features: ['Múltiplos pregadores', 'Séries e calendário', 'Biblioteca da igreja', 'Materiais para ensino', 'Fluxo futuro de aprovação'],
-    cta: 'Falar sobre igreja',
-    href: '/#acesso',
+    cta: 'Selecionar Igreja',
+    href: '/checkout?plan=igreja',
   },
 ];
 
@@ -83,10 +83,10 @@ export default async function SubscriptionPage() {
           <div className="section-title">
             <div>
               <p className="kicker">Status comercial</p>
-              <h2 style={{ margin: 0 }}>Checkout ainda não ativado</h2>
+              <h2 style={{ margin: 0 }}>Checkout em preparação</h2>
             </div>
           </div>
-          <p className="muted">Esta tela prepara a experiência de assinatura, mas ainda não processa pagamento. O próximo passo técnico será integrar checkout, assinatura e controle de limites por plano.</p>
+          <p className="muted">Os botões de plano já levam para uma tela de checkout placeholder. O próximo passo técnico será integrar provedor de pagamento, assinatura e controle de limites por plano.</p>
         </section>
       </section>
     </main>
