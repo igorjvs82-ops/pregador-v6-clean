@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { InternalSidebar } from '@/components/internal-sidebar';
 
 async function createSermon(formData: FormData) {
   'use server';
@@ -57,18 +58,7 @@ export default async function NewSermonPage() {
 
   return (
     <main className="app-shell">
-      <aside className="sidebar">
-        <div>
-          <div className="logo"><span className="logo-mark">V</span><span>Verbum</span></div>
-          <nav className="nav">
-            <Link href="/dashboard">Painel</Link>
-            <Link href="/mensagens/nova">Nova preparação</Link>
-            <Link href="/#planos">Planos</Link>
-            <Link href="/uso-responsavel">Uso responsável</Link>
-          </nav>
-        </div>
-        <p className="sidebar-note">Gere uma base revisável. Revise texto, contexto e aplicações antes de pregar.</p>
-      </aside>
+      <InternalSidebar active="/mensagens/nova" note="Gere uma base revisável. Revise texto, contexto e aplicações antes de pregar." />
 
       <section className="grid">
         <div className="card" style={{ padding: 34, background: 'linear-gradient(135deg, #fff, #fbf8ff)', boxShadow: 'var(--shadow-premium)' }}>
