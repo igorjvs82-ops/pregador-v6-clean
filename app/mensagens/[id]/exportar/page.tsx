@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { InternalSidebar } from '@/components/internal-sidebar';
 
 type AnyRecord = Record<string, unknown>;
 
@@ -100,18 +101,7 @@ export default async function ExportSermonPage({ params }: { params: Promise<{ i
 
   return (
     <main className="app-shell">
-      <aside className="sidebar">
-        <div>
-          <div className="logo"><span className="logo-mark">V</span><span>Verbum</span></div>
-          <nav className="nav">
-            <Link href="/dashboard">Painel</Link>
-            <Link href={`/mensagens/${id}`}>Resultado</Link>
-            <Link href={`/mensagens/${id}/teleprompter`}>Teleprompter</Link>
-            <Link href={`/mensagens/${id}/slides`}>Slides</Link>
-          </nav>
-        </div>
-        <p className="sidebar-note">Exportação textual para copiar, revisar e transformar em material final.</p>
-      </aside>
+      <InternalSidebar active="/minhas-mensagens" note="Exportação textual para copiar, revisar e transformar em material final." />
 
       <section className="grid">
         <div className="card" style={{ padding: 34, background: 'linear-gradient(135deg, #fff, #fbf8ff)', boxShadow: 'var(--shadow-premium)' }}>
