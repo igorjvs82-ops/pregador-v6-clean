@@ -2,13 +2,12 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { InternalSidebar } from '@/components/internal-sidebar';
+import { requireActiveAccess } from '@/lib/access';
 
 async function createSermon(formData: FormData) {
   'use server';
 
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect('/login');
+  const { supabase, user } = await requireActiveAccess();
 
   const payload = {
     biblical_text: String(formData.get('biblical_text') ?? ''),
@@ -52,9 +51,7 @@ async function createSermon(formData: FormData) {
 }
 
 export default async function NewSermonPage() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect('/login');
+  await requireActiveAccess();
 
   return (
     <main className="app-shell">
