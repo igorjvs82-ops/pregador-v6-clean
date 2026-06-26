@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { InternalSidebar } from '@/components/internal-sidebar';
 
 function formatDate(value?: string | null) {
   if (!value) return '';
@@ -26,18 +27,7 @@ export default async function DashboardPage() {
 
   return (
     <main className="app-shell">
-      <aside className="sidebar">
-        <div>
-          <div className="logo"><span className="logo-mark">V</span><span>Verbum</span></div>
-          <nav className="nav">
-            <Link href="/dashboard">Painel</Link>
-            <Link href="/mensagens/nova">Nova preparação</Link>
-            <Link href="/assinatura">Assinatura</Link>
-            <Link href="/uso-responsavel">Uso responsável</Link>
-          </nav>
-        </div>
-        <p className="sidebar-note">Preparação bíblica assistida. A aprovação final pertence ao pregador.</p>
-      </aside>
+      <InternalSidebar active="/dashboard" note="Preparação bíblica assistida. A aprovação final pertence ao pregador." />
 
       <section className="grid">
         <div className="card" style={{ padding: 34, background: 'linear-gradient(135deg, #fff, #fbf8ff)', boxShadow: 'var(--shadow-premium)' }}>
