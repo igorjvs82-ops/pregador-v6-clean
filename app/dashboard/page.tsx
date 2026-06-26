@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
 import { InternalSidebar } from '@/components/internal-sidebar';
+import { requireActiveAccess } from '@/lib/access';
 
 function formatDate(value?: string | null) {
   if (!value) return '';
@@ -9,10 +8,7 @@ function formatDate(value?: string | null) {
 }
 
 export default async function DashboardPage() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) redirect('/login');
+  const { supabase, user } = await requireActiveAccess();
 
   const { data: sermons } = await supabase
     .from('sermons')
