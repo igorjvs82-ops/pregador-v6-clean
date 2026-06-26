@@ -5,8 +5,10 @@ import { InternalSidebar } from '@/components/internal-sidebar';
 import { isSuperAdminEmail } from '@/lib/admin';
 
 const roleLabels: Record<string, string> = {
+  user: 'Usuário',
   preacher: 'Pregador',
   leader: 'Líder',
+  church_admin: 'Líder/Admin igreja',
   admin: 'Admin',
   super_admin: 'Super Admin',
 };
@@ -18,28 +20,34 @@ const statusLabels: Record<string, string> = {
 };
 
 const planLabels: Record<string, string> = {
+  free: 'Grátis',
   initial: 'Acesso inicial',
   essential: 'Essencial',
   preacher: 'Pregador',
   church: 'Igreja',
+  pro: 'Pro',
+  team: 'Igreja & Equipe',
 };
 
 const planPrices: Record<string, number> = {
+  free: 0,
   initial: 0,
   essential: 39,
   preacher: 79,
   church: 149,
+  pro: 29,
+  team: 79,
 };
 
 type AdminUserRow = {
-  user_id: string;
-  email: string;
+  id: string;
+  email: string | null;
   full_name: string | null;
   role: string;
   status: string;
   created_at: string;
   subscriptions?: {
-    plan: string;
+    plan_id: string;
     status: string;
     current_period_end: string | null;
   } | null;
@@ -58,21 +66,21 @@ async function updateUserAdmin(formData: FormData) {
 
   const { supabase } = await requireSuperAdmin();
   const userId = String(formData.get('user_id') ?? '');
-  const role = String(formData.get('role') ?? 'preacher');
+  const role = String(formData.get('role') ?? 'user');
   const status = String(formData.get('status') ?? 'beta');
-  const plan = String(formData.get('plan') ?? 'initial');
-  const subscriptionStatus = plan === 'initial' ? 'trialing' : 'active';
+  const planId = String(formData.get('plan') ?? 'free');
+  const subscriptionStatus = planId === 'free' || planId === 'initial' ? 'free' : 'active';
 
   if (!userId) return;
 
   await supabase
     .from('profiles')
     .update({ role, status })
-    .eq('user_id', userId);
+    .eq('id', userId);
 
   await supabase
     .from('subscriptions')
-    .upsert({ user_id: userId, plan, status: subscriptionStatus }, { onConflict: 'user_id' });
+    .upsert({ user_id: userId, plan_id: planId, status: subscriptionStatus }, { onConflict: 'user_id' });
 
   revalidatePath('/admin');
 }
@@ -82,13 +90,13 @@ export default async function AdminPage() {
 
   const { data: profiles } = await supabase
     .from('profiles')
-    .select('user_id,email,full_name,role,status,created_at,subscriptions(plan,status,current_period_end)')
+    .select('id,email,full_name,role,status,created_at,subscriptions(plan_id,status,current_period_end)')
     .order('created_at', { ascending: false });
 
   const rows = (profiles ?? []) as AdminUserRow[];
   const totalUsers = rows.length;
   const activeSubscribers = rows.filter((row) => row.subscriptions?.status === 'active').length;
-  const mrr = rows.reduce((sum, row) => sum + (row.subscriptions?.status === 'active' ? planPrices[row.subscriptions.plan] ?? 0 : 0), 0);
+  const mrr = rows.reduce((sum, row) => sum + (row.subscriptions?.status === 'active' ? planPrices[row.subscriptions.plan_id] ?? 0 : 0), 0);
   const blockedUsers = rows.filter((row) => row.status === 'blocked').length;
 
   return (
@@ -136,23 +144,26 @@ export default async function AdminPage() {
               </thead>
               <tbody>
                 {rows.map((row) => {
-                  const currentPlan = row.subscriptions?.plan ?? 'initial';
+                  const currentPlan = row.subscriptions?.plan_id ?? 'free';
+                  const email = row.email ?? 'sem e-mail';
                   return (
-                    <tr key={row.user_id}>
+                    <tr key={row.id}>
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}>
-                        <strong>{row.full_name || row.email}</strong>
-                        <p className="muted" style={{ margin: '4px 0 0', fontSize: 13 }}>{row.email}</p>
+                        <strong>{row.full_name || email}</strong>
+                        <p className="muted" style={{ margin: '4px 0 0', fontSize: 13 }}>{email}</p>
                       </td>
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><span className="badge">{roleLabels[row.role] ?? row.role}</span></td>
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><span className="badge">{statusLabels[row.status] ?? row.status}</span></td>
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><strong>{planLabels[currentPlan] ?? currentPlan}</strong></td>
-                      <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><span className="muted">{row.subscriptions?.status ?? 'trialing'}</span></td>
+                      <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><span className="muted">{row.subscriptions?.status ?? 'free'}</span></td>
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}>
                         <form action={updateUserAdmin} className="actions" style={{ alignItems: 'center' }}>
-                          <input type="hidden" name="user_id" value={row.user_id} />
+                          <input type="hidden" name="user_id" value={row.id} />
                           <select name="role" defaultValue={row.role} style={{ padding: 10, borderRadius: 12, border: '1px solid var(--border)' }}>
+                            <option value="user">Usuário</option>
                             <option value="preacher">Pregador</option>
                             <option value="leader">Líder</option>
+                            <option value="church_admin">Líder/Admin igreja</option>
                             <option value="admin">Admin</option>
                             <option value="super_admin">Super Admin</option>
                           </select>
@@ -162,6 +173,7 @@ export default async function AdminPage() {
                             <option value="blocked">Bloqueado</option>
                           </select>
                           <select name="plan" defaultValue={currentPlan} style={{ padding: 10, borderRadius: 12, border: '1px solid var(--border)' }}>
+                            <option value="free">Grátis</option>
                             <option value="initial">Acesso inicial</option>
                             <option value="essential">Essencial</option>
                             <option value="preacher">Pregador</option>
