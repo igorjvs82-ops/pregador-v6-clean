@@ -39,6 +39,12 @@ const planPrices: Record<string, number> = {
   team: 79,
 };
 
+type AdminSubscription = {
+  plan_id: string;
+  status: string;
+  current_period_end: string | null;
+};
+
 type AdminUserRow = {
   id: string;
   email: string | null;
@@ -46,12 +52,12 @@ type AdminUserRow = {
   role: string;
   status: string;
   created_at: string;
-  subscriptions?: {
-    plan_id: string;
-    status: string;
-    current_period_end: string | null;
-  } | null;
+  subscriptions?: AdminSubscription[] | null;
 };
+
+function getSubscription(row: AdminUserRow) {
+  return row.subscriptions?.[0] ?? null;
+}
 
 async function requireSuperAdmin() {
   const supabase = await createClient();
@@ -93,10 +99,13 @@ export default async function AdminPage() {
     .select('id,email,full_name,role,status,created_at,subscriptions(plan_id,status,current_period_end)')
     .order('created_at', { ascending: false });
 
-  const rows = (profiles ?? []) as AdminUserRow[];
+  const rows = (profiles ?? []) as unknown as AdminUserRow[];
   const totalUsers = rows.length;
-  const activeSubscribers = rows.filter((row) => row.subscriptions?.status === 'active').length;
-  const mrr = rows.reduce((sum, row) => sum + (row.subscriptions?.status === 'active' ? planPrices[row.subscriptions.plan_id] ?? 0 : 0), 0);
+  const activeSubscribers = rows.filter((row) => getSubscription(row)?.status === 'active').length;
+  const mrr = rows.reduce((sum, row) => {
+    const subscription = getSubscription(row);
+    return sum + (subscription?.status === 'active' ? planPrices[subscription.plan_id] ?? 0 : 0);
+  }, 0);
   const blockedUsers = rows.filter((row) => row.status === 'blocked').length;
 
   return (
@@ -144,7 +153,8 @@ export default async function AdminPage() {
               </thead>
               <tbody>
                 {rows.map((row) => {
-                  const currentPlan = row.subscriptions?.plan_id ?? 'free';
+                  const subscription = getSubscription(row);
+                  const currentPlan = subscription?.plan_id ?? 'free';
                   const email = row.email ?? 'sem e-mail';
                   return (
                     <tr key={row.id}>
@@ -155,7 +165,7 @@ export default async function AdminPage() {
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><span className="badge">{roleLabels[row.role] ?? row.role}</span></td>
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><span className="badge">{statusLabels[row.status] ?? row.status}</span></td>
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><strong>{planLabels[currentPlan] ?? currentPlan}</strong></td>
-                      <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><span className="muted">{row.subscriptions?.status ?? 'free'}</span></td>
+                      <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}><span className="muted">{subscription?.status ?? 'free'}</span></td>
                       <td style={{ padding: '16px 10px', borderBottom: '1px solid var(--border)' }}>
                         <form action={updateUserAdmin} className="actions" style={{ alignItems: 'center' }}>
                           <input type="hidden" name="user_id" value={row.id} />
