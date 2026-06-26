@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { InternalSidebar } from '@/components/internal-sidebar';
 
 type AnyRecord = Record<string, unknown>;
 
@@ -51,34 +52,36 @@ export default async function TeleprompterPage({ params }: { params: Promise<{ i
   ].filter(Boolean) as { label: string; text: string }[];
 
   return (
-    <main style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #171124, #2e2440)', color: '#fff', padding: 24 }}>
-      <section style={{ maxWidth: 1120, margin: '0 auto', display: 'grid', gap: 22 }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+    <main className="app-shell">
+      <InternalSidebar active="/minhas-mensagens" note="Roteiro limpo para ensaio e apoio de púlpito." />
+
+      <section className="grid">
+        <div className="section-title">
           <div>
-            <Link href={`/mensagens/${id}`} style={{ color: 'rgba(255,255,255,.68)', fontWeight: 800 }}>← Voltar à preparação</Link>
-            <h1 style={{ fontSize: 'clamp(34px, 6vw, 72px)', lineHeight: .95, letterSpacing: '-.06em', margin: '14px 0 8px' }}>{title}</h1>
-            <p style={{ color: 'rgba(255,255,255,.68)', fontSize: 18 }}>{sermon.biblical_text} · Teleprompter pastoral</p>
+            <p className="kicker">Teleprompter pastoral</p>
+            <h1 className="h2">{title}</h1>
+            <p className="lead" style={{ fontSize: 17 }}>{sermon.biblical_text}</p>
           </div>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <div className="actions">
             <Link className="btn btn-secondary" href={`/mensagens/${id}`}>Editar/revisar</Link>
-            <Link className="btn" href="/dashboard">Painel</Link>
+            <Link className="btn btn-secondary" href={`/mensagens/${id}/slides`}>Slides</Link>
           </div>
-        </header>
+        </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 18 }}>
-          <aside className="card" style={{ background: 'rgba(255,255,255,.08)', borderColor: 'rgba(255,255,255,.14)', color: '#fff', position: 'sticky', top: 24, alignSelf: 'start' }}>
-            <p className="kicker" style={{ color: '#a886f0' }}>Blocos</p>
+          <aside className="card" style={{ position: 'sticky', top: 24, alignSelf: 'start' }}>
+            <p className="kicker">Blocos</p>
             <div style={{ display: 'grid', gap: 8 }}>
-              {blocks.map((block, index) => <a key={block.label} href={`#bloco-${index}`} style={{ color: 'rgba(255,255,255,.78)', fontWeight: 800 }}>{block.label}</a>)}
+              {blocks.map((block, index) => <a key={block.label} href={`#bloco-${index}`} style={{ fontWeight: 800 }}>{block.label}</a>)}
             </div>
-            <p style={{ color: 'rgba(255,255,255,.58)', fontSize: 13, lineHeight: 1.5, marginTop: 20 }}>Use esta tela como roteiro de apoio. Revise todo o conteúdo antes de usar no púlpito.</p>
+            <p className="muted" style={{ fontSize: 13, lineHeight: 1.5, marginTop: 20 }}>Use como apoio. Revise tudo antes de pregar.</p>
           </aside>
 
           <section style={{ display: 'grid', gap: 18 }}>
             {blocks.map((block, index) => (
-              <article id={`bloco-${index}`} key={`${block.label}-${index}`} style={{ border: '1px solid rgba(255,255,255,.13)', background: 'rgba(255,255,255,.07)', borderRadius: 28, padding: 'clamp(26px, 5vw, 54px)', boxShadow: '0 30px 80px -44px rgba(0,0,0,.7)' }}>
-                <p style={{ color: '#a886f0', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '.12em', fontSize: 13 }}>{block.label}</p>
-                <div style={{ whiteSpace: 'pre-wrap', fontSize: 'clamp(28px, 4.4vw, 56px)', lineHeight: 1.18, letterSpacing: '-.035em' }}>{block.text}</div>
+              <article id={`bloco-${index}`} key={`${block.label}-${index}`} className="card" style={{ background: 'linear-gradient(135deg, var(--hero-1), var(--hero-2))', color: '#fff', boxShadow: 'var(--shadow-premium)' }}>
+                <p className="kicker" style={{ color: 'rgba(255,255,255,.68)' }}>{block.label}</p>
+                <div style={{ whiteSpace: 'pre-wrap', fontSize: 'clamp(28px, 4vw, 50px)', lineHeight: 1.18, letterSpacing: '-.035em' }}>{block.text}</div>
               </article>
             ))}
           </section>
