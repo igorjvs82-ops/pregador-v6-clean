@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { InternalSidebar } from '@/components/internal-sidebar';
 
 type AnyRecord = Record<string, unknown>;
 
@@ -45,45 +46,46 @@ export default async function SlidesPage({ params }: { params: Promise<{ id: str
   const applications = asArray(outline.applications ?? outline.pastoral_applications);
 
   const slides = [
-    { eyebrow: 'Mensagem', title, body: `${sermon.biblical_text ?? ''}` },
-    proposition ? { eyebrow: 'Proposição', title: proposition, body: 'Ideia central da mensagem' } : null,
-    ...points.map((item, index) => ({ eyebrow: `Ponto ${index + 1}`, title: pointTitle(item, index), body: pointBody(item) })),
-    ...applications.slice(0, 3).map((item, index) => ({ eyebrow: `Aplicação ${index + 1}`, title: pointTitle(item, index), body: pointBody(item) })),
-    conclusion ? { eyebrow: 'Conclusão', title: conclusion, body: 'Encerramento e resposta pastoral' } : null,
-  ].filter(Boolean) as { eyebrow: string; title: string; body: string }[];
+    { eyebrow: 'Mensagem', title, body: `${sermon.biblical_text ?? ''}`, dark: true },
+    proposition ? { eyebrow: 'Proposição', title: proposition, body: 'Ideia central da mensagem', dark: false } : null,
+    ...points.map((item, index) => ({ eyebrow: `Ponto ${index + 1}`, title: pointTitle(item, index), body: pointBody(item), dark: false })),
+    ...applications.slice(0, 3).map((item, index) => ({ eyebrow: `Aplicação ${index + 1}`, title: pointTitle(item, index), body: pointBody(item), dark: false })),
+    conclusion ? { eyebrow: 'Conclusão', title: conclusion, body: 'Encerramento e resposta pastoral', dark: true } : null,
+  ].filter(Boolean) as { eyebrow: string; title: string; body: string; dark: boolean }[];
 
   return (
-    <main style={{ minHeight: '100vh', background: '#171124', color: '#fff', padding: 24 }}>
-      <section style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gap: 24 }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-          <div>
-            <Link href={`/mensagens/${id}`} style={{ color: 'rgba(255,255,255,.68)', fontWeight: 800 }}>← Voltar à preparação</Link>
-            <h1 style={{ fontSize: 'clamp(34px, 5vw, 64px)', lineHeight: .96, letterSpacing: '-.055em', margin: '14px 0 8px' }}>Slides da mensagem</h1>
-            <p style={{ color: 'rgba(255,255,255,.68)', fontSize: 18 }}>{title} · {sermon.biblical_text}</p>
-          </div>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <Link className="btn btn-secondary" href={`/mensagens/${id}/teleprompter`}>Teleprompter</Link>
-            <Link className="btn" href={`/mensagens/${id}`}>Revisar</Link>
-          </div>
-        </header>
+    <main className="app-shell">
+      <InternalSidebar active="/minhas-mensagens" note="Slides são apoio visual. Revise antes de apresentar." />
 
-        <section style={{ display: 'grid', gap: 22 }}>
+      <section className="grid">
+        <div className="section-title">
+          <div>
+            <p className="kicker">Roteiro visual</p>
+            <h1 className="h2">Slides · {sermon.biblical_text}</h1>
+            <p className="lead" style={{ fontSize: 17 }}>{title}</p>
+          </div>
+          <div className="actions">
+            <Link className="btn btn-secondary" href={`/mensagens/${id}`}>Voltar ao esboço</Link>
+            <Link className="btn btn-secondary" href={`/mensagens/${id}/teleprompter`}>Teleprompter</Link>
+            <button className="btn" type="button">Exportar PPTX</button>
+          </div>
+        </div>
+
+        <div className="feature-grid">
           {slides.map((slide, index) => (
-            <article key={`${slide.eyebrow}-${index}`} style={{ aspectRatio: '16 / 9', border: '1px solid rgba(255,255,255,.14)', borderRadius: 30, padding: 'clamp(28px, 5vw, 64px)', background: index === 0 ? 'linear-gradient(135deg, #2e2440, #5b43a9)' : 'linear-gradient(135deg, #fffdfb, #f1ecf9)', color: index === 0 ? '#fff' : '#2e2440', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 34px 90px -50px rgba(0,0,0,.85)' }}>
-              <div>
-                <p style={{ color: index === 0 ? 'rgba(255,255,255,.72)' : '#7c5fd3', fontWeight: 900, letterSpacing: '.14em', textTransform: 'uppercase', fontSize: 13 }}>{slide.eyebrow}</p>
-                <h2 style={{ fontSize: 'clamp(34px, 5.2vw, 74px)', lineHeight: .95, letterSpacing: '-.06em', margin: '18px 0' }}>{slide.title}</h2>
-                {slide.body ? <p style={{ fontSize: 'clamp(18px, 2vw, 28px)', lineHeight: 1.4, color: index === 0 ? 'rgba(255,255,255,.76)' : '#6b6377', maxWidth: 920 }}>{slide.body}</p> : null}
+            <article key={`${slide.eyebrow}-${index}`} className="feature-card" style={{ minHeight: 230, background: slide.dark ? 'linear-gradient(135deg, var(--hero-1), var(--hero-2))' : undefined, color: slide.dark ? '#fff' : undefined }}>
+              <div className="section-title">
+                <p className="kicker" style={slide.dark ? { color: 'rgba(255,255,255,.7)' } : undefined}>{slide.eyebrow}</p>
+                <strong style={{ opacity: .35, fontSize: 34 }}>{String(index + 1).padStart(2, '0')}</strong>
               </div>
-              <footer style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: index === 0 ? 'rgba(255,255,255,.58)' : '#9890a4', fontWeight: 800 }}>
-                <span>Verbum</span>
-                <span>{String(index + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}</span>
-              </footer>
+              <h3 style={{ fontSize: 26, marginTop: 28 }}>{slide.title}</h3>
+              {slide.body ? <p style={{ color: slide.dark ? 'rgba(255,255,255,.72)' : undefined }}>{slide.body}</p> : null}
             </article>
           ))}
-        </section>
-
-        <p style={{ color: 'rgba(255,255,255,.62)', lineHeight: 1.6 }}>Esta é uma visualização inicial dos slides. Revise, edite e aprove o conteúdo antes de usar em culto, célula ou estudo bíblico.</p>
+          <Link className="feature-card" href={`/mensagens/${id}/teleprompter`} style={{ display: 'grid', placeItems: 'center', minHeight: 230, borderStyle: 'dashed' }}>
+            <div style={{ textAlign: 'center' }}><b>Apresentar</b><h3>Abrir apoio de púlpito</h3></div>
+          </Link>
+        </div>
       </section>
     </main>
   );
