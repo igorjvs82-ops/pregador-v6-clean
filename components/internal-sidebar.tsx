@@ -12,6 +12,7 @@ const navItems = [
   { href: '/radar-teologico', label: 'Radar teológico' },
   { href: '/assinatura', label: 'Assinatura' },
   { href: '/configuracoes', label: 'Configurações' },
+  { href: '/admin', label: 'Super Admin' },
 ];
 
 type InternalSidebarProps = {
